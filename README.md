@@ -5,7 +5,7 @@ Cleaner-Upper-RS is a fast, cross-platform file system cleaner for removing recr
 ## Features
 
 - Fast and efficient directory scanning using parallel processing
-- Configurable cleanup patterns
+- Predefined cleanup patterns
 - Cross-platform compatibility
 - Safe cleanup with indicator file checks
 - Automated releases using release-plz
@@ -27,42 +27,24 @@ The compiled binary will be available in the `target/release` directory.
 
 ## Usage
 
-1. Ensure you have a `config.json` file in the same directory as the executable.
-2. Run the executable:
+Run the executable with the `--root-dir` (or `-r`) option to specify the directory to start scanning from:
 
 ```bash
-./cleaner-upper-rs
+./cleaner-upper-rs --root-dir /path/to/scan
 ```
 
-The program will scan the specified root directory and its subdirectories, removing any folders that match the patterns and have the corresponding indicator file.
+The program will scan the specified root directory and its subdirectories, removing any folders that match the predefined patterns.
 
 **Note:** Use this tool with caution. Always ensure you have backups of important data before running cleanup operations.
 
-## Configuration
+## Predefined Patterns
 
-The `config.json` file should contain:
-- `root_dir`: The directory to start scanning from.
-- `patterns`: An array of cleanup patterns, each with:
-  - `target_dir`: The name of the directory to remove.
-  - `indicator_file`: A file that must be present in the parent directory.
+The current version includes the following predefined cleanup patterns:
 
-Example `config.json`:
+- Removing "node_modules" directories when a "package.json" file is present
+- Removing "target" directories when a "Cargo.toml" file is present
 
-```json
-{
-    "root_dir": ".",
-    "patterns": [
-        {
-            "target_dir": ".venv",
-            "indicator_file": "pyproject.toml"
-        },
-        {
-            "target_dir": "node_modules",
-            "indicator_file": "package.json"
-        }
-    ]
-}
-```
+To add or modify patterns, you'll need to update the `Config::new()` function in the `src/config.rs` file.
 
 ## Releases
 

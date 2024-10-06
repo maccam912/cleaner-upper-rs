@@ -9,17 +9,29 @@ mod scanner;
 mod cleanup;
 
 use anyhow::{Context, Result};
+use clap::Parser;
+use std::path::PathBuf;
 use config::Config;
 use scanner::scan_directory;
 use cleanup::cleanup_directories;
 
+#[derive(Parser)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    /// The root directory to start scanning from
+    #[arg(short, long, value_name = "DIR")]
+    root_dir: PathBuf,
+}
+
 /// The main entry point of the program.
 /// 
-/// This function loads the configuration, scans for directories to clean,
-/// performs the cleanup, and reports the results.
+/// This function parses command-line arguments, creates the configuration,
+/// scans for directories to clean, performs the cleanup, and reports the results.
 fn main() -> Result<()> {
-    // Load configuration
-    let config = Config::load().context("Failed to load configuration")?;
+    let args = Args::parse();
+    
+    // Create configuration
+    let config = Config::new(args.root_dir);
     
     println!("Scanning directory: {}", config.root_dir.display());
     
@@ -42,32 +54,19 @@ fn main() -> Result<()> {
 #[doc = r#"
 # Usage
 
-1. Ensure you have a `config.json` file in the same directory as the executable.
-2. The `config.json` file should contain:
-   - `root_dir`: The directory to start scanning from.
-   - `patterns`: An array of cleanup patterns, each with:
-     - `target_dir`: The name of the directory to remove.
-     - `indicator_file`: A file that must be present in the parent directory.
+1. Run the executable with the `--root-dir` (or `-r`) option to specify the directory to start scanning from.
 
-Example `config.json`:
-```json
-{
-    "root_dir": ".",
-    "patterns": [
-        {
-            "target_dir": ".venv",
-            "indicator_file": "pyproject.toml"
-        },
-        {
-            "target_dir": "node_modules",
-            "indicator_file": "package.json"
-        }
-    ]
-}
+Example:
+```
+cleaner-upper-rs --root-dir /path/to/scan
 ```
 
-3. Run the executable. It will scan the specified root directory and its subdirectories,
-   removing any folders that match the patterns and have the corresponding indicator file.
+The program will scan the specified root directory and its subdirectories,
+removing any folders that match the predefined patterns.
+
+Predefined patterns include:
+- Removing "node_modules" directories when a "package.json" file is present
+- Removing "target" directories when a "Cargo.toml" file is present
 
 Note: Use this tool with caution. Always ensure you have backups of important data before running cleanup operations.
 "#]
