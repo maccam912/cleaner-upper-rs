@@ -1,7 +1,5 @@
 # Cleaner-Upper-RS
 
-[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://maccam912.github.io/cleaner-upper-rs/)
-
 Cleaner-Upper-RS is a fast, cross-platform file system cleaner for removing recreatable folders. This Rust-based program scans a specified directory for patterns of folders that can be safely removed to save space, such as virtual environments, build artifacts, and dependency caches.
 
 ## Features
@@ -65,10 +63,6 @@ Example `config.json`:
     ]
 }
 ```
-
-## Documentation
-
-The project documentation is automatically built and deployed to GitHub Pages. You can access the latest version of the documentation [here](https://maccam912.github.io/cleaner-upper-rs/).
 
 ## Releases
 
