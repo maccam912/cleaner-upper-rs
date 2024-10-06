@@ -1,0 +1,19 @@
+[package]
+name = "cleaner-upper-rs"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A fast, cross-platform file system cleaner for removing recreatable folders"
+
+[dependencies]
+walkdir = "2.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+rayon = "1.7"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = 'abort'

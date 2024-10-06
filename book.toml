@@ -1,0 +1,19 @@
+[book]
+authors = ["maccam912"]
+language = "en"
+multilingual = false
+src = "docs"
+title = "Cleaner-Upper-RS Documentation"
+
+[output.html]
+git-repository-url = "https://github.com/maccam912/cleaner-upper-rs"
+edit-url-template = "https://github.com/maccam912/cleaner-upper-rs/edit/main/{path}"
+
+[output.html.search]
+limit-results = 20
+use-boolean-and = true
+boost-title = 2
+boost-hierarchy = 2
+boost-paragraph = 1
+expand = true
+heading-split-level = 2
