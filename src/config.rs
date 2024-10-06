@@ -28,6 +28,18 @@ impl Config {
                     target_dir: "target".to_string(),
                     indicator_file: "Cargo.toml".to_string(),
                 },
+                CleanupPattern {
+                    target_dir: ".venv".to_string(),
+                    indicator_file: "pyproject.toml".to_string(),
+                },
+                CleanupPattern {
+                    target_dir: ".pixi".to_string(),
+                    indicator_file: "pyproject.toml".to_string(),
+                },
+                CleanupPattern {
+                    target_dir: ".pixi".to_string(),
+                    indicator_file: "pixi.toml".to_string(),
+                },
                 // Add more patterns here as needed
             ],
         }
