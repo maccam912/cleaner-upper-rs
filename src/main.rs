@@ -25,6 +25,7 @@
 
 mod cleanup;
 mod config;
+mod scanner;
 
 use anyhow::{Context, Result};
 use clap::Parser;
@@ -46,12 +47,12 @@ struct Args {
 fn main() -> Result<()> {
     let args = Args::parse();
 
-    println!("Starting cache cleanup process...");
+    println!("Starting cleanup process...");
 
-    // Perform cleanup of common cache directories
+    // Perform cleanup of common cache directories and pattern-based directories
     let cleaned_count = cleanup_directories().context("Failed to clean directories")?;
 
-    println!("Successfully cleaned {} cache directories", cleaned_count);
+    println!("Successfully cleaned {} directories", cleaned_count);
 
     // TODO: Handle additional directories specified by the user
     if !args.additional_dirs.is_empty() {

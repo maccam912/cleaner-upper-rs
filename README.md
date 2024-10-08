@@ -5,6 +5,7 @@ Cleaner-Upper-RS is a fast, cross-platform file system cleaner for removing recr
 ## Features
 
 - Automatic detection and cleaning of common cache directories across Windows, macOS, and Linux
+- Recursive scanning and cleaning of directories named "cache" (case-insensitive)
 - Fast and efficient directory cleaning using parallel processing
 - Cross-platform compatibility
 - Safe cleanup with error handling and reporting
@@ -46,6 +47,8 @@ Cleaner-Upper-RS automatically detects and cleans common cache directories based
 - Linux: Includes user cache directories, temporary folders, and common application caches
 
 The tool also cleans some cross-platform application caches, such as npm, Gradle, Maven, Cargo, and pip caches.
+
+Additionally, the program recursively scans the file system for any directory named "cache" (case-insensitive) and cleans its contents, providing a thorough cleanup of various application and system caches.
 
 ## Future Features
 
