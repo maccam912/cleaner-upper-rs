@@ -1,13 +1,13 @@
 # Cleaner-Upper-RS
 
-Cleaner-Upper-RS is a fast, cross-platform file system cleaner for removing recreatable folders. This Rust-based program scans a specified directory for patterns of folders that can be safely removed to save space, such as virtual environments, build artifacts, and dependency caches.
+Cleaner-Upper-RS is a fast, cross-platform file system cleaner for removing recreatable folders and cache directories across different operating systems. This Rust-based program automatically detects and cleans common cache locations, helping to free up disk space efficiently.
 
 ## Features
 
-- Fast and efficient directory scanning using parallel processing
-- Predefined cleanup patterns
+- Automatic detection and cleaning of common cache directories across Windows, macOS, and Linux
+- Fast and efficient directory cleaning using parallel processing
 - Cross-platform compatibility
-- Safe cleanup with indicator file checks
+- Safe cleanup with error handling and reporting
 - Automated releases using release-plz
 - Comprehensive documentation
 
@@ -27,24 +27,29 @@ The compiled binary will be available in the `target/release` directory.
 
 ## Usage
 
-Run the executable with the `--root-dir` (or `-r`) option to specify the directory to start scanning from:
+Run the executable without any arguments to clean common cache directories:
 
 ```bash
-./cleaner-upper-rs --root-dir /path/to/scan
+./cleaner-upper-rs
 ```
 
-The program will scan the specified root directory and its subdirectories, removing any folders that match the predefined patterns.
+The program will automatically detect the operating system and clean relevant cache directories.
 
 **Note:** Use this tool with caution. Always ensure you have backups of important data before running cleanup operations.
 
-## Predefined Patterns
+## Automatic Cache Detection
 
-The current version includes the following predefined cleanup patterns:
+Cleaner-Upper-RS automatically detects and cleans common cache directories based on the operating system:
 
-- Removing "node_modules" directories when a "package.json" file is present
-- Removing "target" directories when a "Cargo.toml" file is present
+- Windows: Includes temporary folders, browser caches, and Windows-specific caches
+- macOS: Includes user and system library caches, browser caches, and application-specific caches
+- Linux: Includes user cache directories, temporary folders, and common application caches
 
-To add or modify patterns, you'll need to update the `Config::new()` function in the `src/config.rs` file.
+The tool also cleans some cross-platform application caches, such as npm, Gradle, Maven, Cargo, and pip caches.
+
+## Future Features
+
+- Ability to specify additional directories to clean using command-line options
 
 ## Releases
 

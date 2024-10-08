@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Matt Koski <maccam912@gmail.com>"]
 license = "MIT"
-description = "A fast, cross-platform file system cleaner for removing recreatable folders"
+description = "A fast, cross-platform file system cleaner for removing recreatable folders and cache directories across different operating systems"
 
 [dependencies]
 walkdir = "2.3"
